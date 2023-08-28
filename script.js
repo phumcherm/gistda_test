@@ -114,7 +114,7 @@ function saveData() {
       // แสดง SweetAlert ที่สวยงาม
       Swal.fire({
           icon: "success",
-          title: "บันทึกข้อมูลสำเร็จ",
+          title: response,
           showConfirmButton: false,
           timer: 1500
       });
