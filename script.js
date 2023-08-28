@@ -8,9 +8,9 @@ const openModalButton = document.getElementById("openModalButton");
 const closeSpan = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-openModalButton.addEventListener("click", function () {
-  modal.style.display = "block";
-});
+// openModalButton.addEventListener("click", function () {
+//   modal.style.display = "block";
+// });
 
 // When the user clicks on <span> (x), close the modal
 closeSpan.addEventListener("click", function () {
@@ -31,7 +31,7 @@ function openModal(id) {
   selectActive(id);
 
   modal.style.display = "block";
-  
+
   const checkbox1 = document.getElementById("exampleRadios1");
   const checkbox2 = document.getElementById("exampleRadios2");
   const checkbox3 = document.getElementById("exampleRadios3");
@@ -43,9 +43,6 @@ function openModal(id) {
 
 function selectActive(id) {
 
-  // var selectedValues = document.getElementById("selectedItem").value;
-
-  // var dropdown = document.getElementById("active");
 
   console.log(id)
 
@@ -69,23 +66,13 @@ function selectActive(id) {
       const checkbox2 = document.getElementById("exampleRadios2");
       const checkbox3 = document.getElementById("exampleRadios3");
 
-      // document.createElement("option").text = เลือกงานที่ใช้จากประวัติการยืม;
-      // document.createElement("option").value = data[i].activity;
-      // dropdown.add(document.createElement("option"))
-
-      // const select = document.getElementById("active");
-      // const option = new Option("Option Text", "option-value");
-      // select.add(option);
-      // for (var i = 0; i < data.length; i++) {
-
-      // var option = document.createElement("option");
       console.log("id : " + data.id);
       console.log("rooms : " + data.rooms);
       console.log("status : " + data.status);
 
 
       // selectElement.value = data.id;
-      
+
       if (data.status === "Free") {
         selectElement.value = "ห้องนี้ยังว่าง";
         checkbox1.checked = true;
@@ -95,24 +82,57 @@ function selectActive(id) {
       } else if (data.status === "Sold") {
         selectElement.value = "ห้องนี้ขายแล้ว";
         checkbox3.checked = true;
-        
+
       } else {
         selectElement.value = "error";
         checkbox1.checked = false;
         checkbox2.checked = false;
         checkbox3.checked = false;
       }
-      
-
-      // option.text = data[i].activity;
-      // option.value = data[i].activity;
-      // dropdown.add(option);
-
-      // }
 
 
     }
 
-    // document.getElementById("data4").innerHTML = data;
   }
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function saveData() {
+  const selectedStatus = document.querySelector("input[name='exampleRadios']:checked").value;
+  const selectedName = document.querySelector("input[name='exampleRadios']:checked").getAttribute("name");
+
+
+  const formData = new FormData();
+  formData.append("status", selectedStatus);
+  formData.append("name", selectedName);
+
+  fetch("update_status.php", {
+      method: "POST",
+      body: formData
+  })
+  .then(response => response.text())
+  .then(response => {
+      // แสดง SweetAlert ที่สวยงาม
+      Swal.fire({
+          icon: "success",
+          title: "บันทึกข้อมูลสำเร็จ",
+          showConfirmButton: false,
+          timer: 1500
+      });
+
+      // เคลียร์การเลือกและเคลียร์ค่าใน result
+      document.querySelector("input[name='exampleRadios']:checked").checked = false;
+      document.getElementById("result").innerHTML = "";
+      
+  modal.style.display = "none";
+  })
+  .catch(error => {
+      console.error("Error:", error);
+  });
+
+  
+}
+
+
+
+
+

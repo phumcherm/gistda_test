@@ -11,6 +11,6 @@ if (isset($_GET['id'])) {
     // }
     echo json_encode($data);
 } else {
-    $data[] = "พังละ repair";
+    $data = "พังละ repair";
     echo json_encode($data);
 }
