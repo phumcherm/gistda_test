@@ -66,6 +66,9 @@ function selectActive(id) {
       const checkbox2 = document.getElementById("exampleRadios2");
       const checkbox3 = document.getElementById("exampleRadios3");
 
+      const data_id = document.getElementById("data_id");
+      document.getElementById("data_id").value = id;
+
       console.log("id : " + data.id);
       console.log("rooms : " + data.rooms);
       console.log("status : " + data.status);
@@ -100,10 +103,14 @@ function saveData() {
   const selectedStatus = document.querySelector("input[name='exampleRadios']:checked").value;
   const selectedName = document.querySelector("input[name='exampleRadios']:checked").getAttribute("name");
 
+  const data_id = document.getElementById("data_id").value;
+
 
   const formData = new FormData();
   formData.append("status", selectedStatus);
   formData.append("name", selectedName);
+  formData.append("data_id", data_id);
+  // formData.append("selectedStatus", selectedStatus);
 
   fetch("update_status.php", {
       method: "POST",
@@ -115,10 +122,11 @@ function saveData() {
       Swal.fire({
           icon: "success",
           title: response,
-          showConfirmButton: false,
-          timer: 1500
+          showConfirmButton: true,
+          // timer: 1500
       });
 
+      tableTreasury()
       // เคลียร์การเลือกและเคลียร์ค่าใน result
       document.querySelector("input[name='exampleRadios']:checked").checked = false;
       document.getElementById("result").innerHTML = "";

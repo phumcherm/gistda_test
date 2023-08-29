@@ -8,7 +8,7 @@ require_once "./function/function.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title>Gistda Test</title>
+    <title>Gistda Test || SERENITY</title>
 
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -43,8 +43,7 @@ require_once "./function/function.php";
 
     <? require "navbar.php"; ?>
 
-
-    <h1 class="text-center" id="header">Building Map</h1>
+    <h1 class="text-center" id="header"><? echo $_GET["zone"] ?> ZONE</h1>
     <? include "control.php"; ?>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 

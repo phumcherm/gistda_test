@@ -1,10 +1,10 @@
 <?php
 require_once "./function/function.php";
 if (isset($_GET['select_table'])) {
-    // $selectedActive = $_GET['id'];
+    $where = $_GET['select_table'];
 
     $selectAll = new DB_con();
-    $sql = $selectAll->selectAll();
+    $sql = $selectAll->selectAll($where);
     // $row = mysqli_fetch_array($sql);
     while ($row = mysqli_fetch_array($sql)) {
         $data[] = $row;

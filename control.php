@@ -2,6 +2,7 @@
     <div class=" modal-content">
         <span class="close">&times;</span>
         <input class="w3-input" required disabled id="md_id" type="text" name="md_id">
+        <input class="w3-input" required disabled id="data_id" type="hidden" name="data_id">
 
         <hr>
         <div class="form-check">
@@ -34,7 +35,7 @@
 <link rel="stylesheet" href="styles.css">
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 <div class="container mt-3">
-    <h1 class="text-center">Building Map</h1>
+    <!-- <h1 class="text-center">Building Map</h1> -->
 
 
     <div id="panel">
@@ -45,6 +46,20 @@
 
 <script src="script.js"></script>
 <script>
+    const header = document.getElementById("header").innerHTML
+    var where_val = ""
+
+    if (header == "SERENITY ZONE"){
+        where_val = " where zone = '" + header + "'";
+
+    }else if(header == "REFLECTION ZONE" ) {
+        where_val = " where zone = '" + header + "'";
+
+    }else if(header == "HORIZON ZONE" ) {
+        where_val = " where zone = '" + header + "'";
+
+    }
+
     tableTreasury()
 
     function tableTreasury() {
@@ -60,7 +75,7 @@
         // var data = "?select_table=";
         var asynchronous = true;
 
-        ajax.open(method, url + "?select_table=1", asynchronous);
+        ajax.open(method, url + "?select_table=" + where_val, asynchronous);
         ajax.send();
         ajax.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -84,7 +99,7 @@
                         }
 
                         html += "<div class='floor' style='margin: 5px;'>";
-                        html += "<h3 class='text-center mb-0 ' style='width: 200px;' >Floor" + floors + " </h3>";
+                        html += "<h3 class='text-center mb-0 ' style='width: 200px;' >Floor " + floors + " </h3>";
                         currentFloor = floors;
                     }
                     // console.log(data);

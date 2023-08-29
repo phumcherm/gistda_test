@@ -17,15 +17,21 @@ class DB_con
         }
     }
 
-    function selectAll()
+    function selectAll($where)
     {
-        $result = mysqli_query($this->dbcon, "SELECT * FROM gistda_test_db.gistda order by id desc;");
+        $result = mysqli_query($this->dbcon, "SELECT * FROM gistda_test_db.gistda $where order by id desc;");
         return $result;
     }
 
     function selectWhere($id)
     {
         $result = mysqli_query($this->dbcon, "SELECT * FROM gistda_test_db.gistda where id = $id;");
+        return $result;
+    }
+
+    function UpdateDataStatus($id,$status)
+    {
+        $result = mysqli_query($this->dbcon, "UPDATE gistda_test_db.gistda SET status = '$status' where id = $id;");
         return $result;
     }
 }
