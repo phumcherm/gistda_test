@@ -11,40 +11,14 @@ require_once "./function/function.php";
     <title>Gistda Test || SERENITY</title>
 
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .floor {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* border: 1px solid #ccc; */
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .room {
-            width: 80px;
-            height: 50px;
-            margin: 5px 5px;
-            padding: 15px 15px;
-            /* background-color: #ccc; */
-            border-radius: 7%;
-        }
-
-        .pool {
-            width: auto;
-            background-color: aquamarine;
-            border-radius: 7%;
-        }
-    </style>
 </head>
 
-<body>
+<body class="bg-dark">
 
     <? require "navbar.php"; ?>
 
-    <h1 class="text-center" id="header"><? echo $_GET["zone"] ?> ZONE</h1>
-    <? include "control.php"; ?>
+    <h1 class="text-center text-light" id="header"><? echo $_GET["zone"] ?> ZONE</h1>
+    <? include "content.php"; ?>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

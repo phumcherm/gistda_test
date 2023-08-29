@@ -60,6 +60,9 @@ function selectActive(id) {
       var data = JSON.parse(this.responseText);
 
       const selectElement = document.getElementById("md_id");
+      const md_floor = document.getElementById("md_floor");
+      const md_room = document.getElementById("md_room");
+      const md_zone = document.getElementById("md_zone");
       selectElement.innerHTML = "";
 
       const checkbox1 = document.getElementById("exampleRadios1");
@@ -77,7 +80,11 @@ function selectActive(id) {
       // selectElement.value = data.id;
 
       if (data.status === "Free") {
-        selectElement.value = "ห้องนี้ยังว่าง";
+        selectElement.value = "ชั้น :" + data.floors + " | ห้อง :" + data.rooms + " | ZONE :" + data.zone;
+        md_floor.value = data.floors;
+        md_room.value = data.floors + "0" + data.rooms;
+        md_zone.value = data.zone;
+
         checkbox1.checked = true;
       } else if (data.status === "Booked") {
         selectElement.value = "ห้องนี้จองแล้ว";
@@ -121,7 +128,8 @@ function saveData() {
       // แสดง SweetAlert ที่สวยงาม
       Swal.fire({
           icon: "success",
-          title: response,
+          title: 'อัพเดทแล้ว',
+          text: response,
           showConfirmButton: true,
           // timer: 1500
       });
@@ -135,6 +143,7 @@ function saveData() {
   })
   .catch(error => {
       console.error("Error:", error);
+      
   });
 
   

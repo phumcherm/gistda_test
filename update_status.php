@@ -11,39 +11,31 @@ require_once "./function/function.php";
 // }
 if (isset($_POST["data_id"])) {
     $data_id = $_POST["data_id"];
+    if (isset($_POST["status"])) {
 
-    $selectWhere = new DB_con();
-    $sql = $selectWhere->selectWhere($data_id);
-    if ($sql) {
-
-        $row = mysqli_fetch_array($sql);
-        // while ($row = mysqli_fetch_array($sql)) {
-        $data = $row;
-        if (isset($_POST["status"])) {
-
-            $status = $_POST["status"]; // รับค่า status จาก AJAX
+        $status = $_POST["status"]; // รับค่า status จาก AJAX
 
 
-            $UpdateDataStatus = new DB_con();
-            $sql = $UpdateDataStatus->UpdateDataStatus($data_id, $status);
+        $UpdateDataStatus = new DB_con();
+        $sql = $UpdateDataStatus->UpdateDataStatus($data_id, $status);
+        if ($sql) {
+
+            $selectWhere = new DB_con();
+            $sql = $selectWhere->selectWhere($data_id);
             if ($sql) {
 
-                if($status == "Free"){
-                    $Status_val = " เปลี่ยนเป็น : ว่าง แล้ว";
-                }elseif($status == "Booked"){
-                    $Status_val = " เปลี่ยนเป็น : จอง แล้ว";
-                }elseif($status == "Sold"){
-                    $Status_val = " เปลี่ยนเป็น : ขาย แล้ว";
-                }
+                $row = mysqli_fetch_array($sql);
+                $data = $row;
 
-                echo "ห้อง : ". $data["floors"]. "0" . $data["rooms"] .$Status_val;
+                echo "ชั้น : " . $data["floors"] . " | ห้อง : " . $data["floors"] . "0" . $data["rooms"] . " | ZONE : " . $data["zone"] ;
+                
             } else {
-                echo "UpdateDataStatus Error";
+                echo "Error ไม่พบข้อมูล ID นี้";
             }
-            // }
+        } else {
+            echo "UpdateDataStatus Error";
         }
-    } else {
-        echo "Error ไม่พบข้อมูล ID นี้";
+        // }
     }
 }
     // ทำการเชื่อมต่อฐานข้อมูล MySQL และทำการบันทึกข้อมูล

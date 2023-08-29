@@ -1,8 +1,18 @@
 <div id="myModal" class="modal">
+
     <div class=" modal-content">
         <span class="close">&times;</span>
-        <input class="w3-input" required disabled id="md_id" type="text" name="md_id">
+        <input class="w3-input" required disabled id="md_id" type="hidden" name="md_id">
         <input class="w3-input" required disabled id="data_id" type="hidden" name="data_id">
+
+        <div class="row">
+            <div>
+
+                ชั้น : <input class="w3-input" required disabled id="md_floor" type="text" name="md_id">
+                ห้อง : <input class="w3-input" required disabled id="md_room" type="text" name="md_id">
+                ZONE : <input class="w3-input" required disabled id="md_zone" type="text" name="md_id">
+            </div>
+        </div>
 
         <hr>
         <div class="form-check">
@@ -38,7 +48,7 @@
     <!-- <h1 class="text-center">Building Map</h1> -->
 
 
-    <div id="panel">
+    <div id="panel" class="rounded" style="background-color: lightsteelblue;">
 
     </div>
 
@@ -49,13 +59,13 @@
     const header = document.getElementById("header").innerHTML
     var where_val = ""
 
-    if (header == "SERENITY ZONE"){
+    if (header == "SERENITY ZONE") {
         where_val = " where zone = '" + header + "'";
 
-    }else if(header == "REFLECTION ZONE" ) {
+    } else if (header == "REFLECTION ZONE") {
         where_val = " where zone = '" + header + "'";
 
-    }else if(header == "HORIZON ZONE" ) {
+    } else if (header == "HORIZON ZONE") {
         where_val = " where zone = '" + header + "'";
 
     }
@@ -95,11 +105,12 @@
 
                     if (floors != currentFloor) {
                         if (currentFloor !== null) {
-                            html += "</div>"
+                            html += "</div>";
+                            html += "<hr>";
                         }
 
                         html += "<div class='floor' style='margin: 5px;'>";
-                        html += "<h3 class='text-center mb-0 ' style='width: 200px;' >Floor " + floors + " </h3>";
+                        html += "<h3 id='floor-header' class='text-center mb-0 ' style='margin-right: 15px;' >Floor " + floors + " </h3>";
                         currentFloor = floors;
                     }
                     // console.log(data);
@@ -118,7 +129,7 @@
                             break;
                     }
 
-                    html += `<button title='${zone}' onclick='openModal(${data[a].id})' class='${buttonClass}' >${floors}0${rooms}</button>`;
+                    html += `<button title='${zone}' onclick='openModal(${data[a].id})' class=' ${buttonClass}' >${floors}0${rooms}</button>`;
 
                 }
 
